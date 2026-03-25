@@ -1,0 +1,24 @@
+pre-push:
+  commands:
+    check-branch-name:
+      run: |
+        branch=$(git rev-parse --abbrev-ref HEAD)
+        echo "Branch: $branch"
+        echo $branch | grep -qE '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|hotfix|release)\/[a-z0-9][a-z0-9-]+$' || {
+          echo "Incorrect branch name: $branch"
+          echo "Allow names:"
+          echo "  build/my-build"
+          echo "  chore/my-chore"
+          echo "  ci/ci-pipe"
+          echo "  docs/docs-update"
+          echo "  feat/my-feat"
+          echo "  fix/my-fix"
+          echo "  perf/my-perf"
+          echo "  refactor/my-refactor"
+          echo "  revert/my-revert"
+          echo "  style/my-style"
+          echo "  test/test-case"
+          echo "  hotfix/some-update"
+          echo "  release/new-release"
+          exit 1
+        }
