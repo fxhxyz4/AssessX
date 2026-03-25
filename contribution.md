@@ -10,6 +10,7 @@ Every `git push` automatically validates that the branch name matches the requir
 ```
 build/my-build
 chore/my-chore
+update/my-update
 ci/ci-pipe
 docs/docs-update
 feat/my-feat
