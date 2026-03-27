@@ -27,6 +27,7 @@ public class LoginController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/sign_up.fxml"));
             Scene scene = new Scene(loader.load());
+           
             scene.getStylesheets().add(getClass().getResource("/styles/login.css").toExternalForm());
             scene.getStylesheets().add(getClass().getResource("/styles/sign_up.css").toExternalForm());
 
