@@ -1,0 +1,102 @@
+.login-root {
+    -fx-background-color: #0d1117;
+    -fx-min-width: 500;
+    -fx-min-height: 500;
+    -fx-pref-width: 1920;
+    -fx-pref-height: 1080;
+}
+
+.login-card {
+    -fx-background-color: #161b22;
+    -fx-background-radius: 6;
+    -fx-border-color: #30363d;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0, 0, 4);
+}
+
+.login-brand {
+    -fx-font-size: 32px;
+    -fx-text-fill: #f0f6fc;
+    -fx-padding: 0 0 20 0;
+    -fx-alignment: CENTER;
+}
+
+.login-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f0f6fc;
+    -fx-padding: 0 0 8 0;
+    -fx-alignment: CENTER;
+}
+
+.btn-oauth {
+    -fx-font-size: 16px;
+    -fx-padding: 12 24;
+    -fx-cursor: hand;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-graphic-text-gap: 12;
+    -fx-alignment: CENTER;
+    -fx-pref-height: 48;
+}
+
+.btn-github {
+    -fx-background-color: #21262d;
+    -fx-text-fill: #c9d1d9;
+    -fx-border-color: #363b42;
+    -fx-border-width: 1;
+}
+
+.btn-github:hover {
+    -fx-background-color: #30363d;
+    -fx-border-color: #8b949e;
+    -fx-text-fill: #f0f6fc;
+}
+
+.btn-github:pressed {
+    -fx-background-color: #282e33;
+}
+
+.btn-google {
+    -fx-background-color: #21262d;
+    -fx-text-fill: #c9d1d9;
+    -fx-border-color: #363b42;
+    -fx-border-width: 1;
+}
+
+.btn-google:hover {
+    -fx-background-color: #30363d;
+    -fx-border-color: #8b949e;
+    -fx-text-fill: #f0f6fc;
+}
+
+.btn-google:pressed {
+    -fx-background-color: #282e33;
+}
+
+.login-separator {
+    -fx-padding: 20 0;
+}
+
+.btn-register {
+    -fx-background-color: #238636;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+    -fx-border-color: #2ea043;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 12 24;
+    -fx-pref-height: 48;
+}
+
+.btn-register:hover {
+    -fx-background-color: #2ea043;
+    -fx-border-color: #3fb950;
+}
+
+.btn-register:pressed {
+    -fx-background-color: #196c2e;
+}

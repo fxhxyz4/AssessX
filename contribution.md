@@ -87,3 +87,7 @@ If you need to push without validation (e.g. directly to `main`):
 ```bash
 git push origin main --no-verify
 ```
+
+
+
+mvn clean javafx:run -U
