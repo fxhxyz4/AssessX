@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.assessx.assessx.controller.dialogs.CreateTestController"
+            fitToWidth="true"
+            style="-fx-background-color:transparent;-fx-background:#0d1117;">
+    <VBox styleClass="app-root" spacing="20" style="-fx-padding:24;">
+
+        <Label text="Новий тест" styleClass="page-title"/>
+
+        <VBox spacing="6">
+            <Label text="Назва тесту" styleClass="field-label"/>
+            <TextField fx:id="titleField" promptText="Назва тесту..." styleClass="input-field"/>
+        </VBox>
+
+        <HBox spacing="16">
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Балів" styleClass="field-label"/>
+                <TextField fx:id="pointsField" promptText="10" styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Час (секунди)" styleClass="field-label"/>
+                <TextField fx:id="timeLimitField" promptText="1800" styleClass="input-field"/>
+            </VBox>
+        </HBox>
+
+        <VBox spacing="12">
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Питання" styleClass="field-label"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="+ Додати питання" styleClass="btn-secondary"
+                        onAction="#onAddQuestion"/>
+            </HBox>
+            <VBox fx:id="questionsContainer" spacing="12"/>
+        </VBox>
+
+        <Label fx:id="errorLabel" styleClass="field-error"
+               visible="false" managed="false" wrapText="true"/>
+
+        <HBox spacing="8" alignment="CENTER_RIGHT">
+            <ProgressIndicator fx:id="spinner" maxWidth="24" maxHeight="24"
+                               visible="false" managed="false"/>
+            <Button text="Скасувати" styleClass="btn-secondary" onAction="#onCancel"/>
+            <Button text="Створити тест" styleClass="btn-primary" onAction="#onCreate"/>
+        </HBox>
+
+    </VBox>
+</ScrollPane>

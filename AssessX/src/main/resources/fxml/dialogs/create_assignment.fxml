@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.assessx.assessx.controller.pages.CreateAssignmentController"
+      styleClass="app-root" spacing="16" style="-fx-padding:24;">
+    <Label text="Нове завдання" styleClass="page-title"/>
+    <VBox spacing="4">
+        <Label text="Група" styleClass="field-label"/>
+        <ComboBox fx:id="groupCombo" maxWidth="Infinity" styleClass="combo-field" promptText="Виберіть групу"/>
+    </VBox>
+    <VBox spacing="4">
+        <Label text="Тип завдання" styleClass="field-label"/>
+        <HBox spacing="16">
+            <fx:define><ToggleGroup fx:id="typeToggle"/></fx:define>
+            <RadioButton fx:id="testRadio" text="Тест" toggleGroup="$typeToggle" styleClass="role-radio"/>
+            <RadioButton fx:id="practiceRadio" text="Практика" toggleGroup="$typeToggle" styleClass="role-radio"/>
+        </HBox>
+    </VBox>
+    <VBox fx:id="testBox" spacing="4">
+        <Label text="Тест" styleClass="field-label"/>
+        <ComboBox fx:id="testCombo" maxWidth="Infinity" styleClass="combo-field" promptText="Виберіть тест"/>
+    </VBox>
+    <VBox fx:id="practiceBox" spacing="4" visible="false" managed="false">
+        <Label text="Практика" styleClass="field-label"/>
+        <ComboBox fx:id="practiceCombo" maxWidth="Infinity" styleClass="combo-field" promptText="Виберіть практику"/>
+    </VBox>
+    <VBox spacing="4">
+        <Label text="Дедлайн (YYYY-MM-DDTHH:mm, необов'язково)" styleClass="field-label"/>
+        <TextField fx:id="deadlineField" promptText="2025-12-31T23:59" styleClass="input-field"/>
+    </VBox>
+    <Label fx:id="errorLabel" styleClass="field-error" visible="false" managed="false" wrapText="true"/>
+    <HBox spacing="8" alignment="CENTER_RIGHT">
+        <ProgressIndicator fx:id="spinner" maxWidth="24" maxHeight="24" visible="false" managed="false"/>
+        <Button text="Призначити" styleClass="btn-primary" onAction="#onCreate"/>
+    </HBox>
+</VBox>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.assessx.assessx.controller.pages.HomePageController"
+            fitToWidth="true" styleClass="app-root"
+            style="-fx-background-color: transparent; -fx-background: transparent;">
+    <padding><Insets top="0" right="0" bottom="0" left="0"/></padding>
+    <VBox spacing="24" style="-fx-padding: 0;">
+        <VBox spacing="4">
+            <Label fx:id="greetingLabel" text="Привіт!" styleClass="page-title"/>
+            <Label fx:id="roleLabel" text="" styleClass="card-subtitle"/>
+        </VBox>
+        <HBox spacing="16">
+            <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="6">
+                <Label text="Завдань" styleClass="card-subtitle"/>
+                <Label fx:id="statAssignments" text="—" style="-fx-font-size:32px;-fx-font-weight:bold;-fx-text-fill:#f0f6fc;"/>
+            </VBox>
+            <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="6">
+                <Label text="Результатів" styleClass="card-subtitle"/>
+                <Label fx:id="statResults" text="—" style="-fx-font-size:32px;-fx-font-weight:bold;-fx-text-fill:#f0f6fc;"/>
+            </VBox>
+            <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="6">
+                <Label text="Середній бал" styleClass="card-subtitle"/>
+                <Label fx:id="statAvg" text="—" style="-fx-font-size:32px;-fx-font-weight:bold;-fx-text-fill:#3fb950;"/>
+            </VBox>
+        </HBox>
+        <VBox styleClass="card" spacing="12">
+            <Label text="Останні завдання" styleClass="card-title"/>
+            <ProgressIndicator fx:id="spinner" maxWidth="32" maxHeight="32"/>
+            <VBox fx:id="assignmentsList" spacing="8"/>
+            <Label fx:id="assignmentsEmpty" text="Завдань ще немає" styleClass="card-subtitle" visible="false" managed="false"/>
+        </VBox>
+        <VBox styleClass="card" spacing="12">
+            <Label text="Останні результати" styleClass="card-title"/>
+            <VBox fx:id="resultsList" spacing="8"/>
+            <Label fx:id="resultsEmpty" text="Результатів ще немає" styleClass="card-subtitle" visible="false" managed="false"/>
+        </VBox>
+    </VBox>
+</ScrollPane>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.assessx.assessx.controller.pages.TakePracticeController"
+      styleClass="app-root" spacing="16" style="-fx-padding:24;">
+    <HBox alignment="CENTER_LEFT">
+        <Label fx:id="titleLabel" text="Практика" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="timerLabel" text="" style="-fx-font-size:20px;-fx-font-weight:bold;-fx-text-fill:#d29922;"/>
+    </HBox>
+    <Label fx:id="descLabel" text="" styleClass="card-subtitle" wrapText="true"/>
+    <ProgressIndicator fx:id="spinner" maxWidth="36" maxHeight="36"/>
+    <HBox spacing="8" VBox.vgrow="ALWAYS">
+        <TextArea fx:id="codeEditor"
+                  promptText="// Введіть ваш Java-код тут..."
+                  HBox.hgrow="ALWAYS"
+                  style="-fx-font-family:'Monospace';-fx-font-size:13px;-fx-background-color:#0d1117;-fx-text-fill:#f0f6fc;-fx-border-color:#30363d;-fx-border-radius:6;-fx-background-radius:6;-fx-padding:12;"/>
+    </HBox>
+    <HBox spacing="12" alignment="CENTER_RIGHT">
+        <VBox HBox.hgrow="ALWAYS" spacing="4">
+            <Label fx:id="resultLabel" text="" style="-fx-font-size:13px;-fx-text-fill:#3fb950;" wrapText="true"/>
+            <Label fx:id="outputLabel" text="" style="-fx-font-size:11px;-fx-text-fill:#8b949e;-fx-font-family:Monospace;" wrapText="true"/>
+        </VBox>
+        <Button fx:id="submitBtn" text="Відправити код" styleClass="btn-primary"
+                onAction="#onSubmit" disable="true"/>
+    </HBox>
+</VBox>

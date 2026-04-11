@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.assessx.assessx.controller.pages.CreatePracticeController"
+            fitToWidth="true"
+            style="-fx-background-color:transparent;-fx-background:#0d1117;">
+    <VBox styleClass="app-root" spacing="16" style="-fx-padding:24;">
+        <Label text="Нова практика" styleClass="page-title"/>
+        <VBox spacing="4">
+            <Label text="Назва" styleClass="field-label"/>
+            <TextField fx:id="titleField" promptText="Назва завдання" styleClass="input-field"/>
+        </VBox>
+        <VBox spacing="4">
+            <Label text="Опис завдання" styleClass="field-label"/>
+            <TextArea fx:id="descField" promptText="Опишіть задачу..."
+                      prefRowCount="4" wrapText="true" styleClass="json-area"/>
+        </VBox>
+        <VBox spacing="4">
+            <Label text="Unit-тести (по одному на рядок)" styleClass="field-label"/>
+            <Label text="Код Java-методу, що перевіряє рішення студента" styleClass="card-subtitle"/>
+            <TextArea fx:id="unitTestsField"
+                      promptText="assertEquals(5, solution(2, 3));"
+                      prefRowCount="5" styleClass="json-area"/>
+        </VBox>
+        <HBox spacing="16">
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Балів" styleClass="field-label"/>
+                <TextField fx:id="pointsField" promptText="10" styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Час (секунди)" styleClass="field-label"/>
+                <TextField fx:id="timeField" promptText="3600" styleClass="input-field"/>
+            </VBox>
+        </HBox>
+        <Label fx:id="errorLabel" styleClass="field-error" visible="false" managed="false" wrapText="true"/>
+        <HBox spacing="8" alignment="CENTER_RIGHT">
+            <ProgressIndicator fx:id="spinner" maxWidth="24" maxHeight="24" visible="false" managed="false"/>
+            <Button text="Створити" styleClass="btn-primary" onAction="#onCreate"/>
+        </HBox>
+    </VBox>
+</ScrollPane>

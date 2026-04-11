@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.assessx.assessx.controller.pages.PracticesPageController"
+      styleClass="app-root" spacing="20" style="-fx-padding:0;">
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label text="Практика (код)" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="createBtn" text="Нове завдання" styleClass="btn-primary"
+                onAction="#onCreate" visible="false" managed="false"/>
+    </HBox>
+    <ProgressIndicator fx:id="spinner" maxWidth="36" maxHeight="36"/>
+    <Label fx:id="emptyLabel" text="Практик немає" styleClass="card-subtitle" visible="false" managed="false"/>
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                style="-fx-background-color:transparent;-fx-background:transparent;">
+        <VBox fx:id="listContainer" spacing="12"/>
+    </ScrollPane>
+</VBox>
