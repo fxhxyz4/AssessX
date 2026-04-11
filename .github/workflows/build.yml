@@ -2,7 +2,7 @@ name: Build JavaFX App
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -17,14 +17,14 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Build jlink (Linux)
+      - name: Build Linux jlink
         run: mvn clean javafx:jlink
         working-directory: AssessX
 
-      - name: Upload Linux build
+      - name: Upload Linux runtime
         uses: actions/upload-artifact@v4
         with:
-          name: linux-app
+          name: linux-runtime
           path: AssessX/target/app
 
   build-windows:
@@ -38,45 +38,33 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Build project
+      - name: Build jar
         run: mvn clean package
         working-directory: AssessX
 
-      - name: Build Windows exe
-        run: |
-          jpackage `
-            --name AssessX `
-            --input AssessX/target `
-            --main-jar AssessX-1.0-SNAPSHOT.jar `
-            --main-class com.assessx.assessx.MainApplication `
-            --type exe
-
-      - name: Upload Windows build
+      - name: Upload jar (Windows)
         uses: actions/upload-artifact@v4
         with:
-          name: windows-exe
-          path: AssessX/*.exe
+          name: windows-jar
+          path: AssessX/target/*.jar
 
   build-macos:
     runs-on: macos-latest
-  
+
     steps:
       - uses: actions/checkout@v4
-  
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
-  
-      - name: Build project
+
+      - name: Build jar
         run: mvn clean package
         working-directory: AssessX
-  
-      - name: Build macOS app
-        run: |
-          jpackage \
-            --name AssessX \
-            --input AssessX/target \
-            --main-jar AssessX-1.0-SNAPSHOT.jar \
-            --main-class com.assessx.assessx.MainApplication \
-            --type app-image  
+
+      - name: Upload jar (macOS)
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-jar
+          path: AssessX/target/*.jar
