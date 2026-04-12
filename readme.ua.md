@@ -8,7 +8,6 @@
   ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?style=flat-square&logo=postgresql)
   ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker)
   ![GitHub](https://img.shields.io/github/license/M-it-2/AssessX)
-  ![Backend](https://img.shields.io/website?url=https%3A%2F%2Fassessx-backend.onrender.com&label=backend&style=flat-square)
   ![GitHub issues](https://img.shields.io/github/issues/M-it-2/AssessX)
 
 </div>
