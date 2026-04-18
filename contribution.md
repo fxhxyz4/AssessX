@@ -88,6 +88,9 @@ If you need to push without validation (e.g. directly to `main`):
 git push origin main --no-verify
 ```
 
+---
 
-
+### Build client
+```bash
 mvn clean javafx:run -U
+```
