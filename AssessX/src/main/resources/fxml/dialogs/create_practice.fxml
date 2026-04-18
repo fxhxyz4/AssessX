@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.Insets?>
 <ScrollPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.assessx.assessx.controller.pages.CreatePracticeController"
+            fx:controller="com.assessx.assessx.controller.dialogs.CreatePracticeController"
             fitToWidth="true"
             style="-fx-background-color:transparent;-fx-background:#0d1117;">
     <VBox styleClass="app-root" spacing="16" style="-fx-padding:24;">

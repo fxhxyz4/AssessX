@@ -20,10 +20,11 @@ public class TakePracticeController extends BasePage {
     @FXML private Label    titleLabel;
     @FXML private Label    descLabel;
     @FXML private Label    timerLabel;
-    @FXML private TextArea codeArea;
-    @FXML private TextArea outputArea;
+    @FXML private TextArea codeEditor;
+    @FXML private Label    outputLabel;
     @FXML private Label    resultLabel;
     @FXML private ProgressIndicator spinner;
+    @FXML private Button   submitBtn;
 
     private long practiceId;
     private long assignmentId;
@@ -34,7 +35,6 @@ public class TakePracticeController extends BasePage {
     public void init(long practiceId, long assignmentId) {
         this.practiceId   = practiceId;
         this.assignmentId = assignmentId;
-
         loadPractice();
     }
 
@@ -48,10 +48,12 @@ public class TakePracticeController extends BasePage {
                     titleLabel.setText(str(p, "title"));
                     descLabel.setText(str(p, "description"));
                     secondsLeft = num(p, "timeLimitSec");
-                    startTimer();
 
-                    codeArea.setText(
-                            "public class Solution {\n" +
+                    startTimer();
+                    if (submitBtn != null) submitBtn.setDisable(false);
+
+                    codeEditor.setText(
+                        "public class Solution {\n" +
                             "    public static Object solve(Object input) {\n" +
                             "        // Ваш код тут\n" +
                             "        return null;\n" +
@@ -62,7 +64,7 @@ public class TakePracticeController extends BasePage {
             } catch (ApiException e) {
                 Platform.runLater(() -> {
                     setSpinner(spinner, false);
-                    outputArea.setText("Помилка завантаження: " + e.getMessage());
+                    outputLabel.setText("Помилка завантаження: " + e.getMessage());
                 });
             }
         });
@@ -100,21 +102,18 @@ public class TakePracticeController extends BasePage {
     protected void onSubmit() {
         if (timer != null) timer.stop();
 
-        String code = codeArea.getText();
-
+        String code = codeEditor.getText();
         if (code.isBlank()) {
-            outputArea.setText("Код не може бути порожнім!");
+            outputLabel.setText("Код не може бути порожнім!");
             return;
         }
 
         setSpinner(spinner, true);
         resultLabel.setText("Відправляємо на перевірку...");
-
-        outputArea.setText("");
+        outputLabel.setText("");
 
         Map<String, Object> payload = new HashMap<>();
         payload.put("code", code);
-
         if (assignmentId > 0) payload.put("assignmentId", assignmentId);
 
         Thread.ofVirtual().start(() -> {
@@ -125,7 +124,7 @@ public class TakePracticeController extends BasePage {
                 Platform.runLater(() -> {
                     setSpinner(spinner, false);
                     resultLabel.setText("");
-                    outputArea.setText("Помилка: " + e.getMessage());
+                    outputLabel.setText("Помилка: " + e.getMessage());
                 });
             }
         });
@@ -134,25 +133,22 @@ public class TakePracticeController extends BasePage {
     private void showResult(JsonObject result) {
         setSpinner(spinner, false);
         int passed = num(result, "passedTests");
-
         int total  = num(result, "totalTests");
         String output = str(result, "output");
 
-        outputArea.setText(output);
+        outputLabel.setText(output);
 
         boolean allPassed = passed == total && total > 0;
         resultLabel.setText(String.format("%d / %d тестів пройдено", passed, total));
         resultLabel.setStyle(allPassed
-                ? "-fx-text-fill: #3fb950; -fx-font-size: 14px; -fx-font-weight: bold;"
-                : "-fx-text-fill: #f85149; -fx-font-size: 14px; -fx-font-weight: bold;");
+            ? "-fx-text-fill: #3fb950; -fx-font-size: 14px; -fx-font-weight: bold;"
+            : "-fx-text-fill: #f85149; -fx-font-size: 14px; -fx-font-weight: bold;");
 
         if (allPassed) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Чудово!");
-
             alert.setHeaderText("Всі тести пройдено!");
             alert.setContentText("Результат: " + passed + " / " + total);
-
             alert.showAndWait();
             ((Stage) titleLabel.getScene().getWindow()).close();
         }

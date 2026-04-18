@@ -65,8 +65,8 @@ public final class ApiClient {
         return postJsonRaw("/api/tests", payload.toString());
     }
 
-    public JsonObject submitTest(long id, Map<String, Object> payload) throws ApiException {
-        return postJson("/api/tests/" + id + "/submit", payload);
+    public JsonObject submitTest(long id, JsonObject payload) throws ApiException {
+        return postJsonRaw("/api/tests/" + id + "/submit", payload.toString());
     }
 
     public void deleteTest(long id) throws ApiException {
@@ -188,7 +188,7 @@ public final class ApiClient {
     private HttpRequest.Builder authRequest(String path) {
         HttpRequest.Builder b = HttpRequest.newBuilder()
             .uri(URI.create(baseUrl + path))
-            .timeout(Duration.ofSeconds(15))
+            .timeout(Duration.ofSeconds(60))
             .header("Accept", "application/json");
         String token = SessionManager.get().getToken();
 

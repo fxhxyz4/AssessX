@@ -12,6 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import com.assessx.assessx.controller.dialogs.TakeTestController;
+import com.assessx.assessx.controller.dialogs.TakePracticeController;
 
 import java.io.IOException;
 import java.util.List;

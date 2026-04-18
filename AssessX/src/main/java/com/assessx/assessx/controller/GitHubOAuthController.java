@@ -24,6 +24,8 @@ public class GitHubOAuthController {
     @FXML private Label    statusLabel;
     @FXML private ProgressIndicator spinner;
 
+    private boolean tokenReceived = false;
+
     @FXML
     public void initialize() {
         WebEngine engine = webView.getEngine();
@@ -41,41 +43,59 @@ public class GitHubOAuthController {
             }
         });
 
-        String authUrl = ApiClient.get().oauthGitHubUrl();
         statusLabel.setText("Відкриваємо GitHub...");
-
-        engine.load(authUrl);
+        engine.load(ApiClient.get().oauthGitHubUrl());
     }
 
     private void checkForToken(WebEngine engine) {
+        if (tokenReceived) return;
+
         String url = engine.getLocation();
 
-        String pageText = (String) engine.executeScript(
-                "document.body ? document.body.innerText : ''"
-        );
+        if (shouldClose(url)) {
+            Platform.runLater(() -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    scene.getStylesheets().add(getClass().getResource("/styles/login.css").toExternalForm());
+                    ((Stage) webView.getScene().getWindow()).setScene(scene);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            return;
+        }
 
+        String pageText = (String) engine.executeScript(
+            "document.body ? document.body.innerText : ''"
+        );
         if (pageText == null || pageText.isBlank()) return;
 
         try {
             String trimmed = pageText.trim();
             if (!trimmed.startsWith("{")) return;
-
             JsonObject json = JsonParser.parseString(trimmed).getAsJsonObject();
-
             if (json.has("token")) {
-                String token = json.get("token").getAsString();
-                handleTokenReceived(token);
+                tokenReceived = true;
+                handleTokenReceived(json.get("token").getAsString());
             }
-        } catch (Exception ignored) {
-            // skip
-        }
+        } catch (Exception ignored) {}
+    }
+
+    private boolean shouldClose(String url) {
+        if (url == null) return false;
+        if (url.contains("localhost")) return false;
+        if (url.contains("github.com/login")) return false;
+        if (url.contains("github.com/sessions")) return false;
+        if (url.contains("github.com/oauth")) return false;
+        if (url.contains("github.com/authorize")) return false;
+        return url.contains("github.com");
     }
 
     private void handleTokenReceived(String token) {
         statusLabel.setText("Авторизація успішна! Завантажуємо профіль...");
         spinner.setVisible(true);
         webView.setVisible(false);
-
         SessionManager.get().setToken(token);
 
         Thread.ofVirtual().start(() -> {
@@ -92,22 +112,13 @@ public class GitHubOAuthController {
     }
 
     private void navigateNext() {
-        SessionManager s = SessionManager.get();
-        String nextFxml;
-
-        nextFxml = "/fxml/complete_registration.fxml";
-
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(nextFxml));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/complete_registration.fxml"));
             Scene scene = new Scene(loader.load());
-
             scene.getStylesheets().add(getClass().getResource("/styles/login.css").toExternalForm());
             scene.getStylesheets().add(getClass().getResource("/styles/sign_up.css").toExternalForm());
-
             scene.getStylesheets().add(getClass().getResource("/styles/app.css").toExternalForm());
-
-            Stage stage = (Stage) statusLabel.getScene().getWindow();
-            stage.setScene(scene);
+            ((Stage) statusLabel.getScene().getWindow()).setScene(scene);
         } catch (IOException e) {
             statusLabel.setText("Помилка навігації: " + e.getMessage());
         }

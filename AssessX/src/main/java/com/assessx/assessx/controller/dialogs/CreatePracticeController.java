@@ -16,10 +16,10 @@ import java.util.Map;
 public class CreatePracticeController extends BasePage {
 
     @FXML private TextField titleField;
-    @FXML private TextArea  descArea;
+    @FXML private TextArea  descField;
     @FXML private TextField pointsField;
-    @FXML private TextField timeLimitField;
-    @FXML private TextArea  unitTestsArea;
+    @FXML private TextField timeField;
+    @FXML private TextArea  unitTestsField;
     @FXML private ProgressIndicator spinner;
     @FXML private Label errorLabel;
 
@@ -28,11 +28,11 @@ public class CreatePracticeController extends BasePage {
         hideError(errorLabel);
 
         String title     = titleField.getText().trim();
-        String desc      = descArea.getText().trim();
+        String desc      = descField.getText().trim();
 
         String pointsStr = pointsField.getText().trim();
-        String timeStr   = timeLimitField.getText().trim();
-        String testsText = unitTestsArea.getText().trim();
+        String timeStr   = timeField.getText().trim();
+        String testsText = unitTestsField.getText().trim();
 
         if (title.isBlank())  {
             showError(errorLabel, "Введіть назву");
@@ -59,15 +59,12 @@ public class CreatePracticeController extends BasePage {
             return;
         }
 
-        List<Map<String, String>> unitTests = new ArrayList<>();
+        List<String> unitTests = new ArrayList<>();
+
         for (String line : testsText.split("\n")) {
             String trimmed = line.trim();
-
             if (!trimmed.isBlank()) {
-                Map<String, String> t = new HashMap<>();
-                t.put("testCode", trimmed);
-
-                unitTests.add(t);
+                unitTests.add(trimmed);
             }
         }
 
@@ -81,6 +78,7 @@ public class CreatePracticeController extends BasePage {
         payload.put("timeLimitSec", timeLimit);
         payload.put("unitTests", unitTests);
 
+        System.out.println("Practice payload: " + new com.google.gson.Gson().toJson(payload));
         Thread.ofVirtual().start(() -> {
             try {
                 ApiClient.get().createPractice(payload);

@@ -95,7 +95,17 @@ public class PracticesPageController {
         descLabel.setWrapText(true);
 
         HBox meta = new HBox(16);
-        Label timeLabel = new Label("󱑆  " + timeSec / 60 + " хв");
+        String timeStr;
+        
+        if (timeSec < 60) {
+            timeStr = timeSec + " с";
+        } else if (timeSec % 60 == 0) {
+            timeStr = timeSec / 60 + " хв";
+        } else {
+            timeStr = timeSec / 60 + " хв " + timeSec % 60 + " с";
+        }
+        
+        Label timeLabel = new Label(timeStr);
 
         timeLabel.getStyleClass().add("card-subtitle");
         Label testCountLabel = new Label("🔬 " + tests + " unit-тестів");

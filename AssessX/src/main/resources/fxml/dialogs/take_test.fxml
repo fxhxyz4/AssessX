@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.Insets?>
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.assessx.assessx.controller.pages.TakeTestController"
+      fx:controller="com.assessx.assessx.controller.dialogs.TakeTestController"
       styleClass="app-root" spacing="16" style="-fx-padding:24;">
+
     <HBox alignment="CENTER_LEFT" spacing="12">
-        <Label fx:id="titleLabel" text="Тест" styleClass="page-title"/>
+        <Label fx:id="testTitleLabel" text="Тест" styleClass="page-title"/>
         <Region HBox.hgrow="ALWAYS"/>
-        <Label fx:id="timerLabel" text="" style="-fx-font-size:20px;-fx-font-weight:bold;-fx-text-fill:#d29922;"/>
+        <Label fx:id="timerLabel" text="00:00"
+               style="-fx-font-size:20px;-fx-font-weight:bold;-fx-text-fill:#d29922;"/>
     </HBox>
-    <Label fx:id="infoLabel" text="" styleClass="card-subtitle"/>
-    <ProgressIndicator fx:id="spinner" maxWidth="36" maxHeight="36"/>
+
+    <Label fx:id="metaLabel" text="" styleClass="card-subtitle"/>
+
+    <ProgressIndicator fx:id="spinner" maxWidth="36" maxHeight="36"
+                       visible="false" managed="false"/>
+    <Label fx:id="errorLabel" styleClass="field-error"
+           visible="false" managed="false" wrapText="true"/>
+
     <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
                 style="-fx-background-color:transparent;-fx-background:transparent;">
-        <VBox fx:id="questionsBox" spacing="16"/>
+        <VBox fx:id="questionsContainer" spacing="16"/>
     </ScrollPane>
-    <HBox spacing="12" alignment="CENTER_RIGHT">
-        <Label fx:id="resultLabel" text="" style="-fx-font-size:14px;-fx-text-fill:#3fb950;" HBox.hgrow="ALWAYS"/>
-        <Button fx:id="submitBtn" text="Здати тест" styleClass="btn-primary"
-                onAction="#onSubmit" disable="true"/>
+
+    <HBox spacing="8" alignment="CENTER_RIGHT">
+        <Button text="Здати тест" styleClass="btn-primary" onAction="#onSubmit"/>
     </HBox>
 </VBox>

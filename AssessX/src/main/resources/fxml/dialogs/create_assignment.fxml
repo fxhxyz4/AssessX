@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.Insets?>
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.assessx.assessx.controller.pages.CreateAssignmentController"
+      fx:controller="com.assessx.assessx.controller.dialogs.CreateAssignmentController"
       styleClass="app-root" spacing="16" style="-fx-padding:24;">
     <Label text="Нове завдання" styleClass="page-title"/>
     <VBox spacing="4">
